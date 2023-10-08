@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/chupanh_item" android:title="Chụp trực tiếp" ></item>
+    <item android:id="@+id/chonanh_item" android:title="Chọn từ trong thư viện" ></item>
+</menu>

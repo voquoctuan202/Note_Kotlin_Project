@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoiDung_GhiChuActivity">
+
+    <TextView
+        android:id="@+id/ngay_nd_ghichu"
+        android:layout_width="163dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="128dp"
+        android:fontFamily="@font/lato_semibold"
+        android:text="01 01 2023"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_text_nd_ghichu"
+        android:layout_width="357dp"
+        android:layout_height="552dp"
+        android:layout_marginLeft="10dp"
+        android:backgroundTint="#00FFFFFF"
+        android:ems="10"
+        android:fontFamily="@font/lato_semibold"
+        android:gravity="start|top"
+        android:hint="Nhập nội dung ghi chú"
+        android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.425"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ngay_nd_ghichu"
+        app:layout_constraintVertical_bias="0.483" />
+
+    <EditText
+        android:id="@+id/edt_ten_nd_ghichu"
+        android:layout_width="347dp"
+        android:layout_height="49dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="68dp"
+        android:backgroundTint="#00FFFFFF"
+        android:ems="10"
+        android:fontFamily="@font/lato_semibold"
+        android:hint="Nhập tên ghi chú"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_nd_ghichu"
+        android:layout_width="50dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="20px"
+        android:layout_marginTop="60px"
+        android:src="@drawable/back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/save_nd_ghichu"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60px"
+        android:layout_marginRight="20px"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/icon_check" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="233dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="60px"
+        android:text="Ghi chú mới"
+        android:fontFamily="@font/lato_semibold"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
