@@ -3,6 +3,7 @@ package com.example.note_kotlin_project
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_chitiet_nd_monhoc.*
 
 class Chitiet_ND_MonhocActivity : AppCompatActivity() {

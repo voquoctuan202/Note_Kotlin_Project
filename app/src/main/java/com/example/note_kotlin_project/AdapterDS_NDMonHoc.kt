@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class AdapterDS_NDMonHoc(var context: Context,var mangNDMH: ArrayList<NDMonHoc>): BaseAdapter() {
+class AdapterDS_NDMonHoc<T>(var context: Context, var mangNDMH: ArrayList<NDMonHoc>): BaseAdapter() {
     class ViewHolder(row: View) {
         var textTenNDMH: TextView
         var hinh_NDMH: ImageView
@@ -44,7 +44,7 @@ class AdapterDS_NDMonHoc(var context: Context,var mangNDMH: ArrayList<NDMonHoc>)
         }
         var noidungMH: NDMonHoc = getItem(p0) as NDMonHoc
         viewHolder.textTenNDMH.text = noidungMH.tenNDMonHoc
-        viewHolder.hinh_NDMH.setImageResource(noidungMH.hinh_NDMonHoc)
+        viewHolder.hinh_NDMH.setImageBitmap(noidungMH.hinh_NDMonHoc)
         return view as View
     }
 }
