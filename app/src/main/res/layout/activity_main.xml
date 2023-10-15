@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <TextView
         android:id="@+id/title_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginVertical="140px"
+        android:layout_marginVertical="180px"
 
         android:fontFamily="@font/lato_semibold"
         android:text="NOTE"

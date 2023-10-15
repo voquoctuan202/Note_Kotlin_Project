@@ -14,63 +14,63 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".PhotoView_CTMHActivity"
+            android:name=".activity.PhotoView_CTMHActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Chitiet_ND_MonhocActivity"
+            android:name=".activity.Chitiet_ND_MonhocActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".NoiDung_MonHocActivity"
+            android:name=".activity.NoiDung_MonHocActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".NoiDung_GhiChuActivity"
+            android:name=".activity.NoiDung_GhiChuActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".GhiChuActivity"
+            android:name=".activity.GhiChuActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".NgayHocActivity"
+            android:name=".activity.NgayHocActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Ds_lichhocActivity"
+            android:name=".activity.Ds_lichhocActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LichHocActivity"
+            android:name=".activity.LichHocActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

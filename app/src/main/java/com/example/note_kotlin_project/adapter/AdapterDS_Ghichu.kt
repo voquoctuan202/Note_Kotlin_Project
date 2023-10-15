@@ -1,4 +1,4 @@
-package com.example.note_kotlin_project
+package com.example.note_kotlin_project.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,22 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.note_kotlin_project.dataclass.GhiChu
+import com.example.note_kotlin_project.R
 
-class AdapterDS_Monhoc<T>(var context: Context, var mangMH: ArrayList<MonHoc>): BaseAdapter() {
-    class ViewHolder(row: View) {
-        var textTenMH: TextView
+class AdapterDS_Ghichu<T>(var context: Context, var mangGC: ArrayList<GhiChu>): BaseAdapter() {
+    class ViewHolder(row: View){
+        var textTenGC : TextView
+
 
         init {
-            textTenMH = row.findViewById(R.id.textTenMonHoc) as TextView
+            textTenGC = row.findViewById(R.id.textTenGhiChu) as TextView
         }
-    }
 
+    }
     override fun getCount(): Int {
-        return mangMH.size
+        return mangGC.size
     }
 
     override fun getItem(p0: Int): Any {
-        return mangMH.get(p0)
+        return mangGC.get(p0)
     }
 
     override fun getItemId(p0: Int): Long {
@@ -33,17 +36,15 @@ class AdapterDS_Monhoc<T>(var context: Context, var mangMH: ArrayList<MonHoc>): 
         var viewHolder : ViewHolder
         if(p1==null){
             var layoutinflater: LayoutInflater = LayoutInflater.from(context)
-            view = layoutinflater.inflate(R.layout.dong_monhoc,null)
+            view = layoutinflater.inflate(R.layout.dong_ghichu,null)
             viewHolder = ViewHolder(view)
             view.tag = viewHolder
         }else{
             view = p1
             viewHolder = p1.tag as ViewHolder
         }
-        var monhoc: MonHoc = getItem(p0) as MonHoc
-        viewHolder.textTenMH.text = monhoc.tenMH
-
+        var ghichu: GhiChu = getItem(p0) as GhiChu
+        viewHolder.textTenGC.text = ghichu.tenGC
         return view as View
     }
-
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ds_lichhocActivity">
+    tools:context=".activity.Ds_lichhocActivity">
 
     <ImageView
         android:id="@+id/back_ds_lichhoc"
@@ -35,20 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/add_dslichhoc"
-        android:layout_width="66dp"
-        android:layout_height="62dp"
-        android:src="@drawable/add_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.969">
-
-    </ImageView>
 
     <ListView
         android:id="@+id/lw_ds_lichhoc"
@@ -64,5 +51,18 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <ImageView
+        android:id="@+id/add_dslichhoc"
+        android:layout_width="66dp"
+        android:layout_height="62dp"
+        android:src="@drawable/add_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.969">
+
+    </ImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>

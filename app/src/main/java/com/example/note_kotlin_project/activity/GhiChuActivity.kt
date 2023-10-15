@@ -1,4 +1,4 @@
-package com.example.note_kotlin_project
+package com.example.note_kotlin_project.activity
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -7,36 +7,37 @@ import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.get
-import kotlinx.android.synthetic.main.activity_ds_lichhoc.*
-import kotlinx.android.synthetic.main.dong_ds_lichhoc.*
+import com.example.note_kotlin_project.R
+import com.example.note_kotlin_project.adapter.AdapterDS_Ghichu
+import com.example.note_kotlin_project.dataclass.GhiChu
+import kotlinx.android.synthetic.main.activity_ghi_chu.*
 
-class Ds_lichhocActivity : AppCompatActivity() {
+class GhiChuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ds_lichhoc)
-        var arrayLH : ArrayList<TenLichHoc> = ArrayList()
-        arrayLH.add(TenLichHoc("Hocki1"))
-        arrayLH.add(TenLichHoc("Hocki2"))
+        setContentView(R.layout.activity_ghi_chu)
+        var arrayGC : ArrayList<GhiChu> = ArrayList()
+        arrayGC.add(GhiChu("Bài1"))
+        arrayGC.add(GhiChu("Bài2"))
+        lw_ghichu.adapter = AdapterDS_Ghichu<Any>(this@GhiChuActivity,arrayGC)
 
-        lw_ds_lichhoc.adapter = AdapterDS_Lichhoc<Any>(this@Ds_lichhocActivity,arrayLH)
-
-        back_ds_lichhoc.setOnClickListener {
-            val intent: Intent = Intent(this@Ds_lichhocActivity, MainActivity::class.java)
+        lw_ghichu.setOnItemClickListener { adapterView, view, i, l ->
+            val intent: Intent = Intent(this@GhiChuActivity, NoiDung_GhiChuActivity::class.java)
+            ghichu = arrayGC[i].tenGC
             startActivity(intent)
+
         }
 
-        lw_ds_lichhoc.setOnItemClickListener { adapterView, view, i, l ->
-            val intent: Intent = Intent(this@Ds_lichhocActivity, LichHocActivity::class.java)
-            tenlichhoc = arrayLH.get(i).tenLH
+        back_ghichu.setOnClickListener {
+            val intent: Intent = Intent(this@GhiChuActivity, MainActivity::class.java)
             startActivity(intent)
         }
-
-        registerForContextMenu(lw_ds_lichhoc)
-        add_dslichhoc.setOnClickListener {
-            addLH()
+        registerForContextMenu(lw_ghichu)
+        add_ghichu.setOnClickListener {
+            themGC()
         }
     }
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
@@ -50,29 +51,29 @@ class Ds_lichhocActivity : AppCompatActivity() {
 
         when (item.itemId) {
             R.id.doiten_item -> {
-                doiTenLH(selectedItemPosition)
+                doiTenGC(selectedItemPosition)
                 return true
             }
             R.id.xoa_item -> {
-                XoaLH(selectedItemPosition)
+                XoaGC(selectedItemPosition)
                 return true
             }
             else -> return super.onContextItemSelected(item)
         }
     }
-    private fun doiTenLH(position: Int) {
-        val items = lw_ds_lichhoc.adapter as AdapterDS_Lichhoc<TenLichHoc>
+    private fun doiTenGC(position: Int) {
+        val items = lw_ghichu.adapter as AdapterDS_Ghichu<GhiChu>
 
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this@GhiChuActivity)
         builder.setTitle("Đổi tên")
 
-        val input = EditText(this)
-        input.setHint("Nhập tên mới")
+        val input = EditText(this@GhiChuActivity)
+        input.setHint("Nhập tên ghi chú mới")
         builder.setView(input)
 
         builder.setPositiveButton("OK") { dialog: DialogInterface, which: Int ->
             val newName = input.text.toString()
-            items.mangLH[position].tenLH = newName
+            items.mangGC[position].tenGC = newName
             items.notifyDataSetChanged()
         }
 
@@ -82,16 +83,16 @@ class Ds_lichhocActivity : AppCompatActivity() {
 
         builder.show()
     }
-    private fun XoaLH(position: Int) {
-        val items = lw_ds_lichhoc.adapter as AdapterDS_Lichhoc<TenLichHoc>
+    private fun XoaGC(position: Int) {
+        val items = lw_ghichu.adapter as AdapterDS_Ghichu<GhiChu>
         val itemName = items.getItem(position)
 
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this@GhiChuActivity)
         builder.setTitle("Xác nhận ")
-        builder.setMessage("Bạn có chắc muốn xóa lịch học này?")
+        builder.setMessage("Bạn có chắc muốn xóa ghi chú này?")
 
         builder.setPositiveButton("Có") { dialog: DialogInterface, which: Int ->
-            items.mangLH.remove(itemName)
+            items.mangGC.remove(itemName)
             items.notifyDataSetChanged()
         }
 
@@ -101,19 +102,19 @@ class Ds_lichhocActivity : AppCompatActivity() {
 
         builder.show()
     }
-    private fun addLH() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Thêm lịch học mới")
+    private fun themGC() {
+        val builder = AlertDialog.Builder(this@GhiChuActivity)
+        builder.setTitle("Thêm ghi chú mới")
 
-        val input = EditText(this)
-        input.setHint("Nhập tên của lịch học mới")
+        val input = EditText(this@GhiChuActivity)
+        input.setHint("Nhập tên của ghi chú mới")
         builder.setView(input)
 
         builder.setPositiveButton("Thêm") { dialog: DialogInterface, which: Int ->
             val newItemName = input.text.toString()
             if (newItemName.isNotBlank()) {
-                val items = lw_ds_lichhoc.adapter as AdapterDS_Lichhoc<TenLichHoc>
-                items.mangLH.add(TenLichHoc(newItemName))
+                val items = lw_ghichu.adapter as AdapterDS_Ghichu<GhiChu>
+                items.mangGC.add(GhiChu(newItemName))
                 items.notifyDataSetChanged()
             }
         }
@@ -125,6 +126,3 @@ class Ds_lichhocActivity : AppCompatActivity() {
         builder.show()
     }
 }
-
-
-

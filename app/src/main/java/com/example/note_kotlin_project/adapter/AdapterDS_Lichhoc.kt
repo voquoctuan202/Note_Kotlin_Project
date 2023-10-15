@@ -1,4 +1,4 @@
-package com.example.note_kotlin_project
+package com.example.note_kotlin_project.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,23 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import com.example.note_kotlin_project.R
+import com.example.note_kotlin_project.dataclass.TenLichHoc
 
-class AdapterDS_Ghichu<T>(var context: Context, var mangGC: ArrayList<GhiChu>): BaseAdapter() {
+class AdapterDS_Lichhoc<T>(var context: Context, var mangLH: ArrayList<TenLichHoc>): BaseAdapter() {
     class ViewHolder(row: View){
-        var textTenGC : TextView
-
+        var textTenLH : TextView
+        var tenNgayLH : TextView
 
         init {
-            textTenGC = row.findViewById(R.id.textTenGhiChu) as TextView
+            textTenLH = row.findViewById(R.id.textTenLichHoc) as TextView
+            tenNgayLH =  row.findViewById(R.id.textNgayTaoLH) as TextView
         }
 
     }
     override fun getCount(): Int {
-        return mangGC.size
+        return mangLH.size
     }
 
     override fun getItem(p0: Int): Any {
-        return mangGC.get(p0)
+        return mangLH.get(p0)
     }
 
     override fun getItemId(p0: Int): Long {
@@ -34,15 +37,16 @@ class AdapterDS_Ghichu<T>(var context: Context, var mangGC: ArrayList<GhiChu>): 
         var viewHolder : ViewHolder
         if(p1==null){
             var layoutinflater: LayoutInflater = LayoutInflater.from(context)
-            view = layoutinflater.inflate(R.layout.dong_ghichu,null)
+            view = layoutinflater.inflate(R.layout.dong_ds_lichhoc,null)
             viewHolder = ViewHolder(view)
             view.tag = viewHolder
         }else{
             view = p1
             viewHolder = p1.tag as ViewHolder
         }
-        var ghichu: GhiChu = getItem(p0) as GhiChu
-        viewHolder.textTenGC.text = ghichu.tenGC
+        var lichhoc: TenLichHoc = getItem(p0) as TenLichHoc
+        viewHolder.textTenLH.text = lichhoc.tenLH
+        viewHolder.tenNgayLH.text = lichhoc.ngayLH
         return view as View
     }
 }

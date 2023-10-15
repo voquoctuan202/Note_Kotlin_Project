@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoiDung_GhiChuActivity">
+    tools:context=".activity.NoiDung_GhiChuActivity">
 
     <TextView
         android:id="@+id/ngay_nd_ghichu"

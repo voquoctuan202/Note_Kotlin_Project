@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LichHocActivity">
+    tools:context=".activity.LichHocActivity">
 
     <ImageView
         android:id="@+id/back_Lichhoc"
@@ -13,6 +13,18 @@
         android:layout_marginLeft="20px"
         android:layout_marginTop="60px"
         android:src="@drawable/back_button">
+
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/back_home_lh"
+        android:layout_width="50dp"
+        android:layout_height="37dp"
+
+        android:layout_marginTop="60px"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20px"
+        android:src="@drawable/img_home">
 
     </ImageView>
 

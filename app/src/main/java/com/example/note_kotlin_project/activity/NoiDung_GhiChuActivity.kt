@@ -1,8 +1,9 @@
-package com.example.note_kotlin_project
+package com.example.note_kotlin_project.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.note_kotlin_project.R
 import kotlinx.android.synthetic.main.activity_noi_dung_ghi_chu.*
 
 class NoiDung_GhiChuActivity : AppCompatActivity() {

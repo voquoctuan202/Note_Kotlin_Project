@@ -4,17 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NgayHocActivity">
+    tools:context=".activity.NgayHocActivity">
 
     <ImageView
         android:id="@+id/back_ngayhoc"
-        android:layout_width="50dp"
-        android:layout_height="37dp"
+        android:layout_width="42dp"
+        android:layout_height="33dp"
         android:layout_marginLeft="20px"
-        android:layout_marginTop="60px"
+        android:layout_marginTop="16dp"
         android:src="@drawable/back_button"
         app:layout_constraintEnd_toStartOf="@+id/textNgayhoc"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/back_home_nh"
+        android:layout_width="50dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="16dp"
+
+        android:src="@drawable/img_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

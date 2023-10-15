@@ -1,4 +1,4 @@
-package com.example.note_kotlin_project
+package com.example.note_kotlin_project.activity
 
 
 
@@ -19,6 +19,10 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.note_kotlin_project.R
+import com.example.note_kotlin_project.adapter.AdapterDS_NDMonHoc
+import com.example.note_kotlin_project.database.SQLiteHelper
+import com.example.note_kotlin_project.dataclass.NDMonHoc
 import kotlinx.android.synthetic.main.activity_noi_dung_mon_hoc.*
 import java.io.File
 import java.io.FileOutputStream
@@ -26,19 +30,19 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
+var hinh_uri : String =""
 class NoiDung_MonHocActivity : AppCompatActivity() {
-
+    val sql: SQLiteHelper = SQLiteHelper(this@NoiDung_MonHocActivity)
     private val IMAGE_CAPTURE_CORE: Int= 1001
     private val PERMISSION_CODE: Int =1000
     var image_uri: Uri? = null
+    val PICK_IMAGE_REQUEST = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_noi_dung_mon_hoc)
 
+
         var tenMon = tenmonhoc
-        var tenThu = thu
-        var tenLH = tenlichhoc
         ND_MH_tenmon.setText(tenMon)
 
         back_nd_monhoc.setOnClickListener {
@@ -48,13 +52,17 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
         }
         var arrayNDMH : ArrayList<NDMonHoc> = ArrayList()
         //arrayNDMH.add(NDMonHoc("Bai1.1",R.drawable.icon_lich_hoc))
-
+        arrayNDMH = sql.getAllNDMonHoc(idMonHoc)
         lw_nd_monhoc.adapter = AdapterDS_NDMonHoc<NDMonHoc>(this@NoiDung_MonHocActivity,arrayNDMH)
 
         lw_nd_monhoc.setOnItemClickListener { adapterView, view, i, l ->
             val intent: Intent= Intent(this@NoiDung_MonHocActivity, Chitiet_ND_MonhocActivity::class.java)
 
-            intent.data = image_uri
+            if (arrayNDMH[i].hinh_NDMonHoc != null){
+                    hinh_uri= arrayNDMH[i].hinh_NDMonHoc
+
+            }
+
             startActivity(intent)
 
         }
@@ -101,7 +109,8 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
 
         builder.setPositiveButton("OK") { dialog: DialogInterface, which: Int ->
             val newName = input.text.toString()
-            items.mangNDMH[position].tenNDMonHoc = newName
+            sql.updateMonHoc(items.mangNDMH.get(position).id,newName)
+            items.mangNDMH =sql.getAllNDMonHoc(idMonHoc)
             items.notifyDataSetChanged()
         }
 
@@ -112,7 +121,7 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
         builder.show()
     }
     private fun XoaNDMH(position: Int) {
-        val items = lw_nd_monhoc.adapter as  AdapterDS_NDMonHoc<NDMonHoc>
+        val items = lw_nd_monhoc.adapter as AdapterDS_NDMonHoc<NDMonHoc>
         val itemName = items.getItem(position)
 
         val builder = AlertDialog.Builder(this@NoiDung_MonHocActivity)
@@ -120,7 +129,9 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
         builder.setMessage("Bạn có chắc muốn xóa lịch học này?")
 
         builder.setPositiveButton("Có") { dialog: DialogInterface, which: Int ->
-            items.mangNDMH.remove(itemName)
+            sql.deleteMonHoc(items.mangNDMH.get(position).id)
+
+            items.mangNDMH = sql.getAllNDMonHoc(idMonHoc)
             items.notifyDataSetChanged()
         }
 
@@ -130,7 +141,7 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
 
         builder.show()
     }
-    private fun themNDMH(img: Bitmap?) {
+    private fun themNDMH(img: Uri?) {
         val builder = AlertDialog.Builder(this@NoiDung_MonHocActivity)
         builder.setTitle("Thêm nội dung mới")
 
@@ -139,10 +150,12 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
         builder.setView(input)
 
         builder.setPositiveButton("Thêm") { dialog: DialogInterface, which: Int ->
-            val newItemName = input.text.toString()
-            if (newItemName.isNotBlank()) {
+            val newTieude = input.text.toString()
+            if (newTieude.isNotBlank()) {
                 val items = lw_nd_monhoc.adapter as AdapterDS_NDMonHoc<NDMonHoc>
-                items.mangNDMH.add(NDMonHoc(newItemName,img))
+                sql.addNDMonHoc(idMonHoc,newTieude,"",img.toString())
+
+                items.mangNDMH = sql.getAllNDMonHoc(idMonHoc)
                 items.notifyDataSetChanged()
             }
         }
@@ -179,6 +192,8 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
                     true
                 }
                 R.id.chonanh_item -> {
+                    val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    startActivityForResult(intent, PICK_IMAGE_REQUEST)
                     Toast.makeText(this@NoiDung_MonHocActivity,"Chọn ảnh",Toast.LENGTH_SHORT).show()
                     true
                 }
@@ -214,11 +229,20 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode== Activity.RESULT_OK){
-            var hinh: Bitmap? = loadBitmapFromUri(this@NoiDung_MonHocActivity,image_uri)
-            themNDMH(hinh)
+        if (resultCode== Activity.RESULT_OK && requestCode != PICK_IMAGE_REQUEST){
+
+            themNDMH(image_uri)
+
+
+        }
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            val selectedImageUri: Uri? = data.data
+
+            themNDMH(selectedImageUri)
+            Toast.makeText(this@NoiDung_MonHocActivity,"Chọn ảnh",Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun loadBitmapFromUri(context: Context, uri: Uri?): Bitmap? {
         var bitmap: Bitmap? = null
         try {
@@ -231,22 +255,5 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
         }
         return bitmap
     }
-    fun saveBitmapToStorage(context: Context, bitmap: Bitmap?): String? {
-        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
-        val imageFileName = "IMG_$timeStamp.jpg"
 
-        val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val imageFile = File(storageDir, imageFileName)
-
-        return try {
-            val outputStream = FileOutputStream(imageFile)
-            bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-            outputStream.flush()
-            outputStream.close()
-            imageFile.absolutePath
-        } catch (e: IOException) {
-            e.printStackTrace()
-            null
-        }
-    }
 }

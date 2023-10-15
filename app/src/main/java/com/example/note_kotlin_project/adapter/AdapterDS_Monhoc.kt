@@ -1,29 +1,29 @@
-package com.example.note_kotlin_project
+package com.example.note_kotlin_project.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
 import android.widget.TextView
+import com.example.note_kotlin_project.dataclass.MonHoc
+import com.example.note_kotlin_project.R
 
-class AdapterDS_NDMonHoc<T>(var context: Context, var mangNDMH: ArrayList<NDMonHoc>): BaseAdapter() {
+class AdapterDS_Monhoc<T>(var context: Context, var mangMH: ArrayList<MonHoc>): BaseAdapter() {
     class ViewHolder(row: View) {
-        var textTenNDMH: TextView
-        var hinh_NDMH: ImageView
+        var textTenMH: TextView
 
         init {
-            textTenNDMH = row.findViewById(R.id.textTenNoiDung) as TextView
-            hinh_NDMH = row.findViewById(R.id.hinh_ndmonhoc) as ImageView
+            textTenMH = row.findViewById(R.id.textTenMonHoc) as TextView
         }
     }
+
     override fun getCount(): Int {
-        return mangNDMH.size
+        return mangMH.size
     }
 
     override fun getItem(p0: Int): Any {
-        return mangNDMH.get(p0)
+        return mangMH.get(p0)
     }
 
     override fun getItemId(p0: Int): Long {
@@ -35,16 +35,17 @@ class AdapterDS_NDMonHoc<T>(var context: Context, var mangNDMH: ArrayList<NDMonH
         var viewHolder : ViewHolder
         if(p1==null){
             var layoutinflater: LayoutInflater = LayoutInflater.from(context)
-            view = layoutinflater.inflate(R.layout.dong_nd_monhoc,null)
-            viewHolder =ViewHolder(view)
+            view = layoutinflater.inflate(R.layout.dong_monhoc,null)
+            viewHolder = ViewHolder(view)
             view.tag = viewHolder
         }else{
             view = p1
             viewHolder = p1.tag as ViewHolder
         }
-        var noidungMH: NDMonHoc = getItem(p0) as NDMonHoc
-        viewHolder.textTenNDMH.text = noidungMH.tenNDMonHoc
-        viewHolder.hinh_NDMH.setImageBitmap(noidungMH.hinh_NDMonHoc)
+        var monhoc: MonHoc = getItem(p0) as MonHoc
+        viewHolder.textTenMH.text = monhoc.tenMH
+
         return view as View
     }
+
 }

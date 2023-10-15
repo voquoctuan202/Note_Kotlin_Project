@@ -4,8 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PhotoView_CTMHActivity">
+    tools:context=".activity.PhotoView_CTMHActivity">
 
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/photoview_chitiet_ndmh"
+        android:layout_width="405dp"
+        android:layout_height="737dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.689"
+        app:srcCompat="@drawable/add_icon" />
     <ImageView
         android:id="@+id/back_photo_chitiet_ndmh"
         android:layout_width="53dp"
@@ -18,16 +30,4 @@
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageView>
-
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/photoview_chitiet_ndmh"
-        android:layout_width="404dp"
-        android:layout_height="615dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.689"
-        app:srcCompat="@drawable/add_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>
