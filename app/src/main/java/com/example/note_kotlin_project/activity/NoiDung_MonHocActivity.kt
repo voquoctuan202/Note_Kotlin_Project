@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_noi_dung_mon_hoc.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -51,13 +53,13 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
             startActivity(intent)
         }
         var arrayNDMH : ArrayList<NDMonHoc> = ArrayList()
-        //arrayNDMH.add(NDMonHoc("Bai1.1",R.drawable.icon_lich_hoc))
+
         arrayNDMH = sql.getAllNDMonHoc(idMonHoc)
         lw_nd_monhoc.adapter = AdapterDS_NDMonHoc<NDMonHoc>(this@NoiDung_MonHocActivity,arrayNDMH)
 
         lw_nd_monhoc.setOnItemClickListener { adapterView, view, i, l ->
             val intent: Intent= Intent(this@NoiDung_MonHocActivity, Chitiet_ND_MonhocActivity::class.java)
-
+            arrayNDMH = sql.getAllNDMonHoc(idMonHoc)
             if (arrayNDMH[i].hinh_NDMonHoc != null){
                     hinh_uri= arrayNDMH[i].hinh_NDMonHoc
 
@@ -129,8 +131,7 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
         builder.setMessage("Bạn có chắc muốn xóa lịch học này?")
 
         builder.setPositiveButton("Có") { dialog: DialogInterface, which: Int ->
-            sql.deleteMonHoc(items.mangNDMH.get(position).id)
-
+            sql.deleteNDMonHoc(items.mangNDMH.get(position).id)
             items.mangNDMH = sql.getAllNDMonHoc(idMonHoc)
             items.notifyDataSetChanged()
         }
@@ -230,19 +231,44 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode== Activity.RESULT_OK && requestCode != PICK_IMAGE_REQUEST){
-
             themNDMH(image_uri)
-
-
         }
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
             val selectedImageUri: Uri? = data.data
-
+            if (selectedImageUri != null) {
+                saveImageToMediaStorage(selectedImageUri)
+            }
             themNDMH(selectedImageUri)
             Toast.makeText(this@NoiDung_MonHocActivity,"Chọn ảnh",Toast.LENGTH_SHORT).show()
         }
     }
+    private fun saveImageToMediaStorage(imageUri: Uri) {
+        val contentResolver = contentResolver
+        val displayName = "MyImage.jpg"
 
+        try {
+            val imageInputStream = contentResolver.openInputStream(imageUri)
+
+            val contentValues = ContentValues()
+            contentValues.put(MediaStore.Images.Media.DISPLAY_NAME, displayName)
+            contentValues.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+
+            val imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+            if (imageUri != null) {
+                val imageOutputStream: OutputStream? = contentResolver.openOutputStream(imageUri)
+                if (imageOutputStream != null) {
+                    imageInputStream?.use { input ->
+                        imageOutputStream.use { output ->
+                            input.copyTo(output)
+                        }
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("ImageSave", "Error saving image to Media Storage", e)
+        }
+    }
     private fun loadBitmapFromUri(context: Context, uri: Uri?): Bitmap? {
         var bitmap: Bitmap? = null
         try {
