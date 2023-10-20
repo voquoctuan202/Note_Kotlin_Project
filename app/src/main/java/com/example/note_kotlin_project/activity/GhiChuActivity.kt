@@ -12,21 +12,26 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.example.note_kotlin_project.R
 import com.example.note_kotlin_project.adapter.AdapterDS_Ghichu
+import com.example.note_kotlin_project.database.SQLiteHelper
 import com.example.note_kotlin_project.dataclass.GhiChu
 import kotlinx.android.synthetic.main.activity_ghi_chu.*
-
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+var idGhiChu : Int =0
 class GhiChuActivity : AppCompatActivity() {
+    val sql: SQLiteHelper = SQLiteHelper(this@GhiChuActivity)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ghi_chu)
         var arrayGC : ArrayList<GhiChu> = ArrayList()
-        arrayGC.add(GhiChu("Bài1"))
-        arrayGC.add(GhiChu("Bài2"))
+        arrayGC = sql.getAllGhiChu()
         lw_ghichu.adapter = AdapterDS_Ghichu<Any>(this@GhiChuActivity,arrayGC)
 
         lw_ghichu.setOnItemClickListener { adapterView, view, i, l ->
             val intent: Intent = Intent(this@GhiChuActivity, NoiDung_GhiChuActivity::class.java)
-            ghichu = arrayGC[i].tenGC
+            arrayGC = sql.getAllGhiChu()
+            idGhiChu = arrayGC[i].id
             startActivity(intent)
 
         }
@@ -73,7 +78,8 @@ class GhiChuActivity : AppCompatActivity() {
 
         builder.setPositiveButton("OK") { dialog: DialogInterface, which: Int ->
             val newName = input.text.toString()
-            items.mangGC[position].tenGC = newName
+            sql.updateNameGhiChu(items.mangGC.get(position).id,newName)
+            items.mangGC =sql.getAllGhiChu()
             items.notifyDataSetChanged()
         }
 
@@ -92,7 +98,9 @@ class GhiChuActivity : AppCompatActivity() {
         builder.setMessage("Bạn có chắc muốn xóa ghi chú này?")
 
         builder.setPositiveButton("Có") { dialog: DialogInterface, which: Int ->
-            items.mangGC.remove(itemName)
+            sql.deleteGhiChu(items.mangGC.get(position).id)
+
+            items.mangGC = sql.getAllGhiChu()
             items.notifyDataSetChanged()
         }
 
@@ -114,7 +122,13 @@ class GhiChuActivity : AppCompatActivity() {
             val newItemName = input.text.toString()
             if (newItemName.isNotBlank()) {
                 val items = lw_ghichu.adapter as AdapterDS_Ghichu<GhiChu>
-                items.mangGC.add(GhiChu(newItemName))
+                //items.mangGC.add(GhiChu(newItemName))
+                val cal = Calendar.getInstance().time
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+                val formattedDate = dateFormat.format(cal)
+
+                sql.addGhiChu(newItemName,formattedDate)
+                items.mangGC = sql.getAllGhiChu()
                 items.notifyDataSetChanged()
             }
         }

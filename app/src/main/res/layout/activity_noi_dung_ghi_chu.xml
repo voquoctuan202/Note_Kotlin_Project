@@ -46,6 +46,8 @@
         android:layout_marginTop="68dp"
         android:backgroundTint="#00FFFFFF"
         android:ems="10"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:fontFamily="@font/lato_semibold"
         android:hint="Nhập tên ghi chú"
         android:inputType="textPersonName"

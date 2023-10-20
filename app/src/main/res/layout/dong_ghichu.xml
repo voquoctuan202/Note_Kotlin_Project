@@ -35,8 +35,9 @@
             />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textNgayGhiChu"
             android:layout_width="356dp"
+
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"

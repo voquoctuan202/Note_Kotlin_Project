@@ -12,10 +12,11 @@ import com.example.note_kotlin_project.R
 class AdapterDS_Ghichu<T>(var context: Context, var mangGC: ArrayList<GhiChu>): BaseAdapter() {
     class ViewHolder(row: View){
         var textTenGC : TextView
-
+        var textNgayGC: TextView
 
         init {
             textTenGC = row.findViewById(R.id.textTenGhiChu) as TextView
+            textNgayGC = row.findViewById(R.id.textNgayGhiChu) as TextView
         }
 
     }
@@ -45,6 +46,7 @@ class AdapterDS_Ghichu<T>(var context: Context, var mangGC: ArrayList<GhiChu>): 
         }
         var ghichu: GhiChu = getItem(p0) as GhiChu
         viewHolder.textTenGC.text = ghichu.tenGC
+        viewHolder.textNgayGC.text = ghichu.ngay
         return view as View
     }
 }

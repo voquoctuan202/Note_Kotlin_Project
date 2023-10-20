@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 var hinh_uri : String =""
+var id_ndmh: Int =0
 class NoiDung_MonHocActivity : AppCompatActivity() {
     val sql: SQLiteHelper = SQLiteHelper(this@NoiDung_MonHocActivity)
     private val IMAGE_CAPTURE_CORE: Int= 1001
@@ -62,7 +63,7 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
             arrayNDMH = sql.getAllNDMonHoc(idMonHoc)
             if (arrayNDMH[i].hinh_NDMonHoc != null){
                     hinh_uri= arrayNDMH[i].hinh_NDMonHoc
-
+                    id_ndmh = arrayNDMH[i].id
             }
 
             startActivity(intent)

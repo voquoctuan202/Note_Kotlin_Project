@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.note_kotlin_project.activity.NoiDung_MonHocActivity
+import com.example.note_kotlin_project.dataclass.GhiChu
 import com.example.note_kotlin_project.dataclass.MonHoc
 import com.example.note_kotlin_project.dataclass.NDMonHoc
 import com.example.note_kotlin_project.dataclass.TenLichHoc
@@ -29,6 +30,8 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
 
         val createNDMonHocTableSQL = "CREATE TABLE NOIDUNGMONHOC (id INTEGER PRIMARY KEY,idMH INTERGER ,tieude TEXT,noidung TEXT,hinhanh TEXT);"
         p0.execSQL(createNDMonHocTableSQL)
+        val createGhiChuTableSQL = "CREATE TABLE GHICHU (id INTEGER PRIMARY KEY ,tieude TEXT,noidung TEXT,ngay TEXT);"
+        p0.execSQL(createGhiChuTableSQL)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase, p1: Int, p2: Int) {
@@ -42,11 +45,13 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
         val dropNDMonHocTableSQL = "DROP TABLE IF EXISTS NOIDUNGMONHOC;"
         p0.execSQL(dropNDMonHocTableSQL)
 
+        val dropGhiChuTableSQL = "DROP TABLE IF EXISTS GHICHU;"
+        p0.execSQL(dropGhiChuTableSQL)
 
     }
 
 
-
+///////////////////////////////////////////////////////////////
     fun addLichHoc(tenLichHoc: String,ngayLichHoc: String) {
         val db = writableDatabase
         val values = ContentValues()
@@ -249,5 +254,122 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
 
         return ndmonHoc
     }
+    @SuppressLint("Range")
+    fun getNDMonHocByID(idMon:Int,idMonHoc:Int): NDMonHoc? {
+        val db = readableDatabase
+        val query = "SELECT * FROM NOIDUNGMONHOC "
+        val cursor = db.rawQuery(query, null)
 
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val idMH = cursor.getInt(cursor.getColumnIndex("idMH"))
+                val tieude = cursor.getString(cursor.getColumnIndex("tieude"))
+                val noidung = cursor.getString(cursor.getColumnIndex("noidung"))
+                val hinh = cursor.getString(cursor.getColumnIndex("hinhanh"))
+                if((idMH == idMonHoc) && (id == idMon)){
+                    var ndmonHoc: NDMonHoc = NDMonHoc(id,idMH,tieude,noidung,hinh)
+                    cursor.close()
+                    db.close()
+                    return ndmonHoc
+                }
+
+            } while (cursor.moveToNext())
+        }
+        return null
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    fun addGhiChu(tenGhiChu: String,ngay: String) {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put("tieude",tenGhiChu)
+        values.put("ngay",ngay)
+        values.put("noidung","")
+        db.insert("GHICHU", null, values)
+        db.close()
+    }
+
+    // Sửa thông tin của một người dựa trên ID
+    fun updateGhiChu(id: Int, tenGhiChu: String,noidungGhiChu: String) {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put("tieude",tenGhiChu )
+        values.put("noidung",noidungGhiChu )
+        db.update("GHICHU", values, "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+    fun updateNameGhiChu(id: Int, tenGhiChu: String) {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put("tieude",tenGhiChu )
+        db.update("GHICHU", values, "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
+    // Xóa một người dựa trên ID
+    fun deleteGhiChu(id: Int) {
+        val db = writableDatabase
+        db.delete("GHICHU", "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+    @SuppressLint("Range")
+    fun deleteAllGhiChu(){
+        val db = writableDatabase
+        val query = "SELECT * FROM GHICHU"
+        val cursor = db.rawQuery(query, null)
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                deleteGhiChu(id)
+            } while (cursor.moveToNext())
+        }
+
+    }
+
+    @SuppressLint("Range")
+    fun getAllGhiChu(): ArrayList<GhiChu> {
+        val ghiChu = ArrayList<GhiChu>()
+        val db = readableDatabase
+        val query = "SELECT * FROM GHICHU"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val tieude = cursor.getString(cursor.getColumnIndex("tieude"))
+                val noidung = cursor.getString(cursor.getColumnIndex("noidung"))
+                val ngay = cursor.getString(cursor.getColumnIndex("ngay"))
+                ghiChu.add(GhiChu(id,tieude,noidung,ngay))
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return ghiChu
+
+    }
+    @SuppressLint("Range")
+    fun getGhiChuByID(idGC:Int): GhiChu? {
+        val db = readableDatabase
+        val query = "SELECT * FROM GHICHU "
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val tieude = cursor.getString(cursor.getColumnIndex("tieude"))
+                val noidung = cursor.getString(cursor.getColumnIndex("noidung"))
+                val ngay = cursor.getString(cursor.getColumnIndex("ngay"))
+                if(id == idGC){
+                    var ghiChu: GhiChu = GhiChu(id,tieude,noidung,ngay)
+                    cursor.close()
+                    db.close()
+                    return ghiChu
+                }
+
+            } while (cursor.moveToNext())
+        }
+        return null
+    }
 }
