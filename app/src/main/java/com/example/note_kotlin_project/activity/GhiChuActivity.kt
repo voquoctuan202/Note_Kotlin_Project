@@ -1,19 +1,23 @@
 package com.example.note_kotlin_project.activity
 
+import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.note_kotlin_project.R
 import com.example.note_kotlin_project.adapter.AdapterDS_Ghichu
 import com.example.note_kotlin_project.database.SQLiteHelper
 import com.example.note_kotlin_project.dataclass.GhiChu
+import com.example.note_kotlin_project.dataclass.ThongBao
 import kotlinx.android.synthetic.main.activity_ghi_chu.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,10 +25,11 @@ import kotlin.collections.ArrayList
 var idGhiChu : Int =0
 class GhiChuActivity : AppCompatActivity() {
     val sql: SQLiteHelper = SQLiteHelper(this@GhiChuActivity)
+    var arrayGC : ArrayList<GhiChu> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ghi_chu)
-        var arrayGC : ArrayList<GhiChu> = ArrayList()
+
         arrayGC = sql.getAllGhiChu()
         lw_ghichu.adapter = AdapterDS_Ghichu<Any>(this@GhiChuActivity,arrayGC)
 
@@ -47,7 +52,7 @@ class GhiChuActivity : AppCompatActivity() {
     }
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        menuInflater.inflate(R.menu.menu_item, menu)
+        menuInflater.inflate(R.menu.menu_ghichu, menu)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -55,6 +60,26 @@ class GhiChuActivity : AppCompatActivity() {
         val selectedItemPosition = info.position // Đây là vị trí của item trong danh sách
 
         when (item.itemId) {
+            R.id.thongbao_item -> {
+                val currentDate = Calendar.getInstance()
+                val datePickerDialog = DatePickerDialog(
+                    this,
+                    { _, year, month, dayOfMonth ->
+                        val selectedDate = Calendar.getInstance()
+                        selectedDate.set(year, month, dayOfMonth)
+                        var date =  dayOfMonth.toString() + "/"+ (month+1).toString() + "/"+ year.toString()
+                        sql.addThongBao(arrayGC[selectedItemPosition].tenGC,date,arrayGC[selectedItemPosition].id,1)
+                        Toast.makeText(this@GhiChuActivity, "Đã thiết lập thông báo đến ngày: " + date  ,Toast.LENGTH_SHORT).show()
+
+                    },
+                    currentDate.get(Calendar.YEAR),
+                    currentDate.get(Calendar.MONTH),
+                    currentDate.get(Calendar.DAY_OF_MONTH)
+                )
+                datePickerDialog.show()
+
+                return true
+            }
             R.id.doiten_item -> {
                 doiTenGC(selectedItemPosition)
                 return true
@@ -66,6 +91,7 @@ class GhiChuActivity : AppCompatActivity() {
             else -> return super.onContextItemSelected(item)
         }
     }
+
     private fun doiTenGC(position: Int) {
         val items = lw_ghichu.adapter as AdapterDS_Ghichu<GhiChu>
 
@@ -122,13 +148,17 @@ class GhiChuActivity : AppCompatActivity() {
             val newItemName = input.text.toString()
             if (newItemName.isNotBlank()) {
                 val items = lw_ghichu.adapter as AdapterDS_Ghichu<GhiChu>
-                //items.mangGC.add(GhiChu(newItemName))
+
                 val cal = Calendar.getInstance().time
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy")
                 val formattedDate = dateFormat.format(cal)
 
                 sql.addGhiChu(newItemName,formattedDate)
                 items.mangGC = sql.getAllGhiChu()
+
+                arrayGC = sql.getAllGhiChu()
+                lw_ghichu.adapter = AdapterDS_Ghichu<Any>(this@GhiChuActivity,arrayGC)
+
                 items.notifyDataSetChanged()
             }
         }

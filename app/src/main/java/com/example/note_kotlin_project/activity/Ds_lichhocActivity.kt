@@ -62,6 +62,7 @@ class Ds_lichhocActivity : AppCompatActivity() {
             R.id.truycapnhanh_item -> {
                 Toast.makeText(this, "Thiết lập truy cập nhanh "+ arrayLH[selectedItemPosition].tenLH,Toast.LENGTH_SHORT).show()
                 save_truycapnhanh(arrayLH[selectedItemPosition].id)
+
                 return true
             }
             R.id.doiten_item -> {
@@ -142,6 +143,8 @@ class Ds_lichhocActivity : AppCompatActivity() {
 
                 items.mangLH = sql.getAllLichHoc()
 
+                arrayLH= sql.getAllLichHoc()
+                lw_ds_lichhoc.adapter = AdapterDS_Lichhoc<Any>(this@Ds_lichhocActivity,arrayLH)
                 items.notifyDataSetChanged()
             }
         }

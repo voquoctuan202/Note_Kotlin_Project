@@ -380,7 +380,7 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
     fun addThongBao(tenTB: String,ngay: String,doituong: Int, loai:Int) {
         val db = writableDatabase
         val values = ContentValues()
-        values.put("tieude",tenTB)
+        values.put("ten",tenTB)
         values.put("ngay",ngay)
         values.put("doituong",doituong)
         values.put("loai",loai)

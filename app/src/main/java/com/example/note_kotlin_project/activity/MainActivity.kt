@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             val intent:Intent = Intent(this@MainActivity, GhiChuActivity::class.java)
             startActivity(intent)
         }
-        if (getID_truycapnhanh() ==-1){
+        if (getID_truycapnhanh()==-1){
 
             main_truycapnhanh.setOnClickListener {
                 Toast.makeText(this,"Bạn chưa thiết lập truy cập nhanh", Toast.LENGTH_SHORT).show()
