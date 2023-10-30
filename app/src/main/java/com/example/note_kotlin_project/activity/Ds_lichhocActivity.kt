@@ -3,33 +3,29 @@ package com.example.note_kotlin_project.activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.note_kotlin_project.R
 import com.example.note_kotlin_project.adapter.AdapterDS_Lichhoc
 import com.example.note_kotlin_project.database.SQLiteHelper
 import com.example.note_kotlin_project.dataclass.TenLichHoc
-
 import kotlinx.android.synthetic.main.activity_ds_lichhoc.*
-import java.io.File
-
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class Ds_lichhocActivity : AppCompatActivity() {
     val sql: SQLiteHelper = SQLiteHelper(this@Ds_lichhocActivity)
+    var arrayLH : ArrayList<TenLichHoc> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ds_lichhoc)
-        var arrayLH : ArrayList<TenLichHoc> = ArrayList()
+
 
         arrayLH= sql.getAllLichHoc()
 
@@ -55,7 +51,7 @@ class Ds_lichhocActivity : AppCompatActivity() {
     }
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        menuInflater.inflate(R.menu.menu_item, menu)
+        menuInflater.inflate(R.menu.menu_ds_lichhoc, menu)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -63,6 +59,11 @@ class Ds_lichhocActivity : AppCompatActivity() {
         val selectedItemPosition = info.position // Đây là vị trí của item trong danh sách
 
         when (item.itemId) {
+            R.id.truycapnhanh_item -> {
+                Toast.makeText(this, "Thiết lập truy cập nhanh "+ arrayLH[selectedItemPosition].tenLH,Toast.LENGTH_SHORT).show()
+                save_truycapnhanh(arrayLH[selectedItemPosition].id)
+                return true
+            }
             R.id.doiten_item -> {
                 doiTenLH(selectedItemPosition)
                 return true
@@ -150,6 +151,12 @@ class Ds_lichhocActivity : AppCompatActivity() {
         }
 
         builder.show()
+    }
+    fun save_truycapnhanh(id : Int){
+        val sharedPreferences = getSharedPreferences("id_lichhoc", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("id_lichhoc", id)
+        editor.apply()
     }
 
 

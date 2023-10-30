@@ -7,10 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.note_kotlin_project.activity.NoiDung_MonHocActivity
-import com.example.note_kotlin_project.dataclass.GhiChu
-import com.example.note_kotlin_project.dataclass.MonHoc
-import com.example.note_kotlin_project.dataclass.NDMonHoc
-import com.example.note_kotlin_project.dataclass.TenLichHoc
+import com.example.note_kotlin_project.dataclass.*
 
 class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME,null, DATABASE_VERSION
@@ -30,8 +27,12 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
 
         val createNDMonHocTableSQL = "CREATE TABLE NOIDUNGMONHOC (id INTEGER PRIMARY KEY,idMH INTERGER ,tieude TEXT,noidung TEXT,hinhanh TEXT);"
         p0.execSQL(createNDMonHocTableSQL)
+
         val createGhiChuTableSQL = "CREATE TABLE GHICHU (id INTEGER PRIMARY KEY ,tieude TEXT,noidung TEXT,ngay TEXT);"
         p0.execSQL(createGhiChuTableSQL)
+
+        val createThongBaoTableSQL = "CREATE TABLE THONGBAO (id INTEGER PRIMARY KEY ,ten TEXT,ngay TEXT,doituong INTERGER, loai INTERGER);"
+        p0.execSQL(createThongBaoTableSQL)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase, p1: Int, p2: Int) {
@@ -47,6 +48,9 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
 
         val dropGhiChuTableSQL = "DROP TABLE IF EXISTS GHICHU;"
         p0.execSQL(dropGhiChuTableSQL)
+
+        val dropThongBaoTableSQL = "DROP TABLE IF EXISTS THONGBAO;"
+        p0.execSQL(dropThongBaoTableSQL)
 
     }
 
@@ -372,4 +376,90 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
         }
         return null
     }
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    fun addThongBao(tenTB: String,ngay: String,doituong: Int, loai:Int) {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put("tieude",tenTB)
+        values.put("ngay",ngay)
+        values.put("doituong",doituong)
+        values.put("loai",loai)
+        db.insert("THONGBAO", null, values)
+        db.close()
+    }
+
+    // Sửa thông tin của một người dựa trên ID
+
+    // Xóa một người dựa trên ID
+    fun deleteThongBao(id: Int) {
+        val db = writableDatabase
+        db.delete("THONGBAO", "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
+    @SuppressLint("Range")
+    fun deleteAllThongBao(){
+        val db = writableDatabase
+        val query = "SELECT * FROM THONGBAO"
+        val cursor = db.rawQuery(query, null)
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                deleteThongBao(id)
+            } while (cursor.moveToNext())
+        }
+
+    }
+
+    @SuppressLint("Range")
+    fun getAllThongBao(): ArrayList<ThongBao> {
+        val thongBao = ArrayList<ThongBao>()
+        val db = readableDatabase
+        val query = "SELECT * FROM THONGBAO"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val ten = cursor.getString(cursor.getColumnIndex("ten"))
+                val ngay = cursor.getString(cursor.getColumnIndex("ngay"))
+                val doituong = cursor.getInt(cursor.getColumnIndex("doituong"))
+                val loai = cursor.getInt(cursor.getColumnIndex("loai"))
+                thongBao.add(ThongBao(id,ten,ngay,doituong,loai))
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return thongBao
+
+    }
+    @SuppressLint("Range")
+    fun getAllThongBaoToDay(today:String): ArrayList<ThongBao> {
+        val thongBao = ArrayList<ThongBao>()
+        val db = readableDatabase
+        val query = "SELECT * FROM THONGBAO"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val ten = cursor.getString(cursor.getColumnIndex("ten"))
+                val ngay = cursor.getString(cursor.getColumnIndex("ngay"))
+                val doituong = cursor.getInt(cursor.getColumnIndex("doituong"))
+                val loai = cursor.getInt(cursor.getColumnIndex("loai"))
+                if(today.equals(ngay)) {
+                    thongBao.add(ThongBao(id, ten, ngay, doituong, loai))
+                }
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return thongBao
+
+    }
+
 }
