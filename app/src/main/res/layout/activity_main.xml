@@ -4,18 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    android:background="#EFEFEF"
+    >
 
     <TextView
         android:id="@+id/title_view"
-        android:layout_width="wrap_content"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="180px"
-
-        android:fontFamily="@font/lato_semibold"
+        android:textStyle="bold"
+        android:layout_marginTop="71dp"
+        android:fontFamily="@font/magistral_medium"
         android:text="NOTE"
-        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textColor="@color/theme"
         android:textSize="60dp" />
 
     <GridLayout
@@ -24,16 +29,21 @@
         android:layout_below="@+id/title_view"
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
         android:columnCount="2"
-        android:rowCount="3">
+        android:rowCount="3"
+        android:background="#EFEFEF"
+        >
 
         <androidx.cardview.widget.CardView
             android:id="@+id/main_lichhoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+            android:layout_width="350px"
+            android:layout_height="450px"
+            android:minHeight="400px"
             android:layout_row="0"
+            app:cardBackgroundColor="@color/theme"
             android:layout_rowWeight="1"
             android:layout_column="0"
             android:layout_columnWeight="1"
@@ -42,7 +52,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="30dp"
             app:cardElevation="8dp"
             >
 
@@ -51,11 +61,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+
+                >
 
                 <ImageView
-                    android:layout_width="250px"
-                    android:layout_height="250px"
+                    android:layout_width="230px"
+                    android:layout_height="230px"
                     android:src="@drawable/calendar"></ImageView>
 
                 <TextView
@@ -63,16 +75,18 @@
                     android:layout_height="wrap_content"
                     android:text="Lịch học"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="25dp"
+                    android:fontFamily="@font/lato_semibold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="27dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/main_ghichu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250px"
+            android:layout_height="450px"
+            app:cardBackgroundColor="@color/theme"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="1"
@@ -82,9 +96,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            >
+            app:cardCornerRadius="30dp"
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -94,24 +107,25 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="250px"
-                    android:layout_height="250px"
+                    android:layout_width="230px"
+                    android:layout_height="230px"
                     android:src="@drawable/img_ghichu"></ImageView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_semibold"
                     android:text="Ghi chú"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="25dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="27dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
             android:id="@+id/main_truycapnhanh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="350px"
+            android:layout_height="450px"
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:layout_column="0"
@@ -121,8 +135,9 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="30dp"
             app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/theme"
             >
 
             <LinearLayout
@@ -133,26 +148,28 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="250px"
-                    android:layout_height="250px"
+                    android:layout_width="230px"
+                    android:layout_height="230px"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/clock"></ImageView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  Truy cập   \nnhanh"
+                    android:text="Truy cập nhanh"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="25dp"
+                    android:fontFamily="@font/lato_semibold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/main_thongbao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="350px"
+            android:layout_height="430px"
+            app:cardBackgroundColor="@color/theme"
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:layout_column="1"
@@ -162,7 +179,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="30dp"
             app:cardElevation="8dp"
             >
 
@@ -174,8 +191,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="250px"
-                    android:layout_height="250px"
+                    android:layout_width="220px"
+                    android:layout_height="220px"
                     android:src="@drawable/notification"></ImageView>
 
                 <TextView
@@ -183,8 +200,9 @@
                     android:layout_height="wrap_content"
                     android:text="Thông báo"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="25dp"
+                    android:fontFamily="@font/lato_semibold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="27dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

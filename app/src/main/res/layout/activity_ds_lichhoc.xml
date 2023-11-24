@@ -6,36 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".activity.Ds_lichhocActivity">
 
-    <ImageView
-        android:id="@+id/back_ds_lichhoc"
-        android:layout_width="53dp"
-        android:layout_height="42dp"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="60px"
-        android:src="@drawable/back_button"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.41"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <ImageView-->
+<!--        android:id="@+id/back_ds_lichhoc"-->
+<!--        android:layout_width="53dp"-->
+<!--        android:layout_height="42dp"-->
+<!--        android:layout_marginLeft="20px"-->
+<!--        android:layout_marginTop="60px"-->
+<!--        android:src="@drawable/back_button"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/textView"-->
+<!--        app:layout_constraintHorizontal_bias="0.41"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-    </ImageView>
+<!--    </ImageView>-->
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60px"
-        android:fontFamily="@font/lato_semibold"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/lato_black"
         android:text="Danh sách lịch học"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/theme"
+
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
     <ListView
         android:id="@+id/lw_ds_lichhoc"
@@ -46,7 +45,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="2dp"
         android:divider="@null"
-        android:dividerHeight="0dp"
+        android:dividerHeight="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,4 +64,18 @@
         app:layout_constraintVertical_bias="0.969">
 
     </ImageView>
+
+    <Button
+        android:id="@+id/back_ds_lichhoc"
+        android:layout_width="66dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/custom_btn_back"
+        android:text="back"
+        android:textColor="@color/theme"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042" />
 </androidx.constraintlayout.widget.ConstraintLayout>
