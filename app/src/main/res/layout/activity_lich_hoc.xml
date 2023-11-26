@@ -6,24 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".activity.LichHocActivity">
 
-    <ImageView
+    <Button
         android:id="@+id/back_Lichhoc"
-        android:layout_width="50dp"
-        android:layout_height="37dp"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="60px"
-        android:src="@drawable/back_button">
-
-    </ImageView>
+        android:layout_width="66dp"
+        android:layout_height="42dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/custom_btn_back"
+        android:text="back"
+        android:textColor="@color/theme"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042" />
 
     <ImageView
         android:id="@+id/back_home_lh"
-        android:layout_width="50dp"
-        android:layout_height="37dp"
+        android:layout_width="60dp"
+        android:layout_height="42dp"
 
-        android:layout_marginTop="60px"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="20px"
+        android:layout_marginStart="341dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:src="@drawable/img_home">
 
     </ImageView>
@@ -35,8 +46,8 @@
         android:maxWidth="280dp"
         android:layout_centerHorizontal="true"
         android:layout_marginVertical="30dp"
+        android:fontFamily="@font/lato_black"
         android:textColor="@color/black"
-        android:fontFamily="@font/lato_semibold"
         android:text="Lịch học"
         android:textSize="30dp"
 
@@ -64,7 +75,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardBackgroundColor="@color/theme" :cardElevation="8dp"
+
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -79,7 +92,7 @@
                     android:layout_height="wrap_content"
                     android:text="Thứ 2"
                     android:fontFamily="@font/lato_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -101,7 +114,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/theme" :cardElevation="8dp"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -119,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:text="Thứ 3"
                     android:fontFamily="@font/lato_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -141,7 +156,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/theme" :cardElevation="8dp"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -156,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:text="Thứ 4"
                     android:fontFamily="@font/lato_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -178,7 +195,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/theme" :cardElevation="8dp"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -194,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:text="Thứ 5"
                     android:fontFamily="@font/lato_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:textAlignment="center"
@@ -216,7 +235,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/theme" :cardElevation="8dp"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -234,7 +255,7 @@
 
                     android:textSize="25dp"
                     android:fontFamily="@font/lato_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     ></TextView>
@@ -255,7 +276,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/theme" :cardElevation="8dp"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -272,7 +295,7 @@
                     android:text="Thứ 7"
                     android:textSize="25dp"
                     android:fontFamily="@font/lato_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     ></TextView>
@@ -293,7 +316,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/theme" :cardElevation="8dp"
+            >
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -309,7 +334,7 @@
                     android:layout_height="wrap_content"
                     android:text="Khác"
                     android:fontFamily="@font/lato_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold"
                     android:textAlignment="center"

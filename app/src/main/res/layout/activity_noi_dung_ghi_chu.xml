@@ -57,32 +57,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/back_nd_ghichu"
-        android:layout_width="50dp"
-        android:layout_height="37dp"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="60px"
-        android:src="@drawable/back_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/save_nd_ghichu"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="60px"
-        android:layout_marginRight="20px"
-        android:text="Save"
+    <Button
+        android:id="@+id/back_nd_ghichu"
+        android:layout_width="66dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/custom_btn_back"
+        android:text="back"
+        android:textColor="@color/theme"
+        android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/icon_check" />
+        app:layout_constraintVertical_bias="0.033" />
+
+    <Button
+        android:id="@+id/save_nd_ghichu"
+        android:layout_width="66dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="328dp"
+        android:background="@drawable/custom_btn_back"
+        android:text="Lưu"
+        android:textColor="@color/theme"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033" />
 
     <TextView
         android:id="@+id/textView2"

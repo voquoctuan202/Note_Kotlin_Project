@@ -6,19 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.NoiDung_MonHocActivity">
 
-    <ImageView
+    <Button
         android:id="@+id/back_nd_monhoc"
-        android:layout_width="50dp"
-        android:layout_height="37dp"
-        android:layout_marginRight="20px"
-        android:layout_marginTop="60px"
-        android:src="@drawable/back_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        android:layout_width="66dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/custom_btn_back"
+        android:text="back"
+        android:textColor="@color/theme"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        />
+        app:layout_constraintVertical_bias="0.033" />
 
     <ImageView
         android:id="@+id/add_nd_monhoc"
@@ -40,11 +40,11 @@
         android:layout_width="236dp"
         android:layout_height="40dp"
         android:layout_marginTop="60px"
-        android:fontFamily="@font/lato_semibold"
+        android:gravity="center"
         android:text="Tên môn học"
-        android:textAlignment="center"
+        android:fontFamily="@font/lato_semibold"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +60,6 @@
         app:layout_constraintHorizontal_bias="0.578"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.718" />
+        app:layout_constraintVertical_bias="0.728" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

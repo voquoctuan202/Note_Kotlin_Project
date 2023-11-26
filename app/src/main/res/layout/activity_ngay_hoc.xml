@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".activity.NgayHocActivity">
 
-    <ImageView
-        android:id="@+id/back_ngayhoc"
-        android:layout_width="42dp"
-        android:layout_height="33dp"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/back_button"
-        app:layout_constraintEnd_toStartOf="@+id/textNgayhoc"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-    </ImageView>
+    <Button
+        android:id="@+id/back_ngayhoc"
+        android:layout_width="66dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/custom_btn_back"
+        android:text="back"
+        android:textColor="@color/theme"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <ImageView
         android:id="@+id/back_home_nh"
@@ -40,10 +41,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Thứ"
-        android:fontFamily="@font/lato_semibold"
+
+        android:fontFamily="@font/lato_black"
         android:textColor="@color/black"
+
         android:textSize="30dp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

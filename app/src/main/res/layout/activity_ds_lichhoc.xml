@@ -28,7 +28,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/lato_black"
         android:text="Danh sách lịch học"
-        android:textColor="@color/theme"
+        android:textColor="@color/black"
 
         android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"

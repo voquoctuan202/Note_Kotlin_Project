@@ -8,19 +8,20 @@
 
     <ListView
         android:id="@+id/lw_ghichu"
-        android:layout_width="368dp"
-        android:layout_height="616dp"
+        android:layout_width="390dp"
+        android:layout_height="613dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
+        android:divider="@null"
         android:foregroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <ImageView
         android:id="@+id/add_ghichu"
@@ -35,17 +36,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.969" />
 
-    <ImageView
-        android:id="@+id/back_ghichu"
-        android:layout_width="50dp"
-        android:layout_height="37dp"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="60px"
-        android:src="@drawable/back_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintStart_toStartOf="parent"
+<!--    <ImageView-->
+<!--        -->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="37dp"-->
+<!--        android:layout_marginLeft="20px"-->
+<!--        android:layout_marginTop="60px"-->
+<!--        android:src="@drawable/back_button"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.046"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
 
-        app:layout_constraintTop_toTopOf="parent" />
+<!--        app:layout_constraintTop_toTopOf="parent" -->
+<!--        />-->
+    <Button
+        android:id="@+id/back_ghichu"
+        android:layout_width="66dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/custom_btn_back"
+        android:text="back"
+        android:textColor="@color/theme"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

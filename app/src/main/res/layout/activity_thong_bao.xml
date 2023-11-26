@@ -6,19 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.ThongBaoActivity">
 
-    <ImageView
+    <Button
         android:id="@+id/back_thongbao"
-        android:layout_width="53dp"
+        android:layout_width="66dp"
         android:layout_height="42dp"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/back_button"
-        app:layout_constraintEnd_toStartOf="@+id/tieude_thongbao"
-        app:layout_constraintHorizontal_bias="0.065"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/custom_btn_back"
+        android:text="back"
+        android:textColor="@color/theme"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.021" />
 
     <TextView
         android:id="@+id/tieude_thongbao"
