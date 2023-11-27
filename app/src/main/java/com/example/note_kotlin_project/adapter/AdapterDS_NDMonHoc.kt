@@ -18,10 +18,12 @@ class AdapterDS_NDMonHoc<T>(var context: Context, var mangNDMH: ArrayList<NDMonH
     class ViewHolder(row: View) {
         var textTenNDMH: TextView
         var hinh_NDMH: ImageView
-
+        var textNgayNDMH : TextView
         init {
             textTenNDMH = row.findViewById(R.id.textTenNoiDung) as TextView
             hinh_NDMH = row.findViewById(R.id.hinh_ndmonhoc) as ImageView
+            textNgayNDMH = row.findViewById(R.id.ngay_nd_monhoc) as TextView
+
         }
     }
     override fun getCount(): Int {
@@ -50,8 +52,8 @@ class AdapterDS_NDMonHoc<T>(var context: Context, var mangNDMH: ArrayList<NDMonH
         }
         var noidungMH: NDMonHoc = getItem(p0) as NDMonHoc
         viewHolder.textTenNDMH.text = noidungMH.tieudeNDMonHoc
-
         viewHolder.hinh_NDMH.setImageURI(Uri.parse(noidungMH.hinh_NDMonHoc))
+        viewHolder.textNgayNDMH.text = noidungMH.ngayMH
         return view as View
     }
 

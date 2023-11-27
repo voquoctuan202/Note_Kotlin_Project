@@ -155,7 +155,10 @@ class NoiDung_MonHocActivity : AppCompatActivity() {
             val newTieude = input.text.toString()
             if (newTieude.isNotBlank()) {
                 val items = lw_nd_monhoc.adapter as AdapterDS_NDMonHoc<NDMonHoc>
-                sql.addNDMonHoc(idMonHoc,newTieude,"",img.toString())
+                val cal = Calendar.getInstance().time
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+                val formattedDate = dateFormat.format(cal)
+                sql.addNDMonHoc(idMonHoc,newTieude,"",formattedDate,img.toString())
 
                 items.mangNDMH = sql.getAllNDMonHoc(idMonHoc)
                 items.notifyDataSetChanged()

@@ -47,6 +47,7 @@
             />
 
         <TextView
+            android:id="@+id/ngay_nd_monhoc"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_gravity="right"

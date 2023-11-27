@@ -31,7 +31,7 @@
             android:fontFamily="@font/lato_semibold"
             android:gravity="center_vertical"
             android:text="Tên môn học"
-            android:textColor="@color/theme_td"
+            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
 

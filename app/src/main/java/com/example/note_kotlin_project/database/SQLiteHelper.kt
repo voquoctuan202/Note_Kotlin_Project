@@ -25,7 +25,7 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
         val createMonHocTableSQL = "CREATE TABLE MONHOC (id INTEGER PRIMARY KEY,idLH INTERGER ,tenMon TEXT,thu Interger);"
         p0.execSQL(createMonHocTableSQL)
 
-        val createNDMonHocTableSQL = "CREATE TABLE NOIDUNGMONHOC (id INTEGER PRIMARY KEY,idMH INTERGER ,tieude TEXT,noidung TEXT,hinhanh TEXT);"
+        val createNDMonHocTableSQL = "CREATE TABLE NOIDUNGMONHOC (id INTEGER PRIMARY KEY,idMH INTERGER ,tieude TEXT,noidung TEXT,ngay TEXT,hinhanh TEXT);"
         p0.execSQL(createNDMonHocTableSQL)
 
         val createGhiChuTableSQL = "CREATE TABLE GHICHU (id INTEGER PRIMARY KEY ,tieude TEXT,noidung TEXT,ngay TEXT);"
@@ -189,12 +189,13 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
 
     //////////////////////////////////////////////////////////
 
-    fun addNDMonHoc(idMH: Int,tieudeMH: String,noidungMH: String,hinh: String) {
+    fun addNDMonHoc(idMH: Int,tieudeMH: String,noidungMH: String,ngay: String,hinh: String) {
         val db = writableDatabase
         val values = ContentValues()
         values.put("idMH",idMH)
         values.put("tieude",tieudeMH)
         values.put("noidung",noidungMH)
+        values.put("ngay",ngay)
         values.put("hinhanh",hinh)
         db.insert("NOIDUNGMONHOC", null, values)
         db.close()
@@ -245,9 +246,10 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
                 val idMH = cursor.getInt(cursor.getColumnIndex("idMH"))
                 val tieude = cursor.getString(cursor.getColumnIndex("tieude"))
                 val noidung = cursor.getString(cursor.getColumnIndex("noidung"))
+                val ngay = cursor.getString(cursor.getColumnIndex("ngay"))
                 val hinh = cursor.getString(cursor.getColumnIndex("hinhanh"))
                 if(idMH == idMonHoc){
-                    ndmonHoc.add(NDMonHoc(id, idMH,tieude,noidung,hinh))
+                    ndmonHoc.add(NDMonHoc(id, idMH,tieude,noidung,ngay,hinh))
                 }
 
             } while (cursor.moveToNext())
@@ -270,9 +272,10 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
                 val idMH = cursor.getInt(cursor.getColumnIndex("idMH"))
                 val tieude = cursor.getString(cursor.getColumnIndex("tieude"))
                 val noidung = cursor.getString(cursor.getColumnIndex("noidung"))
+                val ngay = cursor.getString(cursor.getColumnIndex("ngay"))
                 val hinh = cursor.getString(cursor.getColumnIndex("hinhanh"))
                 if((idMH == idMonHoc) && (id == idMon)){
-                    var ndmonHoc: NDMonHoc = NDMonHoc(id,idMH,tieude,noidung,hinh)
+                    var ndmonHoc: NDMonHoc = NDMonHoc(id,idMH,tieude,ngay,noidung,hinh)
                     cursor.close()
                     db.close()
                     return ndmonHoc
