@@ -3,6 +3,7 @@ package com.example.note_kotlin_project.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.note_kotlin_project.R
 import com.example.note_kotlin_project.database.SQLiteHelper
@@ -14,6 +15,7 @@ class NoiDung_GhiChuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_noi_dung_ghi_chu)
+        val receivedNumber = intent.getIntExtra("tb", 0)
 
         var ghiChu: GhiChu? = sql.getGhiChuByID(idGhiChu)
         if( ghiChu != null){
@@ -30,8 +32,15 @@ class NoiDung_GhiChuActivity : AppCompatActivity() {
 
 
         back_nd_ghichu.setOnClickListener {
-            val intent: Intent = Intent(this@NoiDung_GhiChuActivity, GhiChuActivity::class.java)
-            startActivity(intent)
+            Log.d("AAA",receivedNumber.toString())
+            if(receivedNumber!=0){
+                val intent: Intent = Intent(this@NoiDung_GhiChuActivity, ThongBaoActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent: Intent = Intent(this@NoiDung_GhiChuActivity, GhiChuActivity::class.java)
+                startActivity(intent)
+            }
+
         }
 
     }

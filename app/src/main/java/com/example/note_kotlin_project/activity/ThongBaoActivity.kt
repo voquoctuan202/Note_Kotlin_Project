@@ -42,6 +42,10 @@ class ThongBaoActivity : AppCompatActivity() {
             val intent: Intent = Intent(this@ThongBaoActivity, MainActivity::class.java)
             startActivity(intent)
         }
+        lw_ds_thongbao.setOnItemClickListener { adapterView, view, i, l ->
+            intentTB(i)
+
+        }
         var arrayTB : ArrayList<ThongBao> = ArrayList()
         arrayTB = sql.getAllThongBao()
         tieude_thongbao.setText("Tất cả thông báo")
@@ -51,6 +55,42 @@ class ThongBaoActivity : AppCompatActivity() {
             showPopupMenu(menu_thongbao)
         }
         registerForContextMenu(lw_ds_thongbao)
+    }
+    fun intentTB(i:Int){
+        when (trangthai) {
+            1 -> {
+                arrayTB = getAllThongBao()
+                lw_ds_thongbao.adapter = AdapterDS_ThongBao<Any>(this@ThongBaoActivity,arrayTB)
+                val intent: Intent = Intent(this, NoiDung_GhiChuActivity::class.java)
+                idGhiChu = arrayTB[i].id
+                intent.putExtra("tb",1)
+                startActivity(intent)
+            }
+            2 -> {
+                arrayTB = getThongBaoHomNay(currentDate)
+                lw_ds_thongbao.adapter = AdapterDS_ThongBao<Any>(this@ThongBaoActivity,arrayTB)
+                val intent: Intent = Intent(this, NoiDung_GhiChuActivity::class.java)
+                idGhiChu = arrayTB[i].id
+                intent.putExtra("tb",1)
+                startActivity(intent)
+            }
+            3 -> {
+                arrayTB = getThongBaoChuaDen(currentDate.toString())
+                lw_ds_thongbao.adapter = AdapterDS_ThongBao<Any>(this@ThongBaoActivity,arrayTB)
+                val intent: Intent = Intent(this, NoiDung_GhiChuActivity::class.java)
+                idGhiChu = arrayTB[i].id
+                intent.putExtra("tb",1)
+                startActivity(intent)
+            }
+            else -> {
+                arrayTB = getThongBaoDaQua(currentDate)
+                lw_ds_thongbao.adapter = AdapterDS_ThongBao<Any>(this@ThongBaoActivity,arrayTB)
+                val intent: Intent = Intent(this, NoiDung_GhiChuActivity::class.java)
+                idGhiChu = arrayTB[i].id
+                intent.putExtra("tb",1)
+                startActivity(intent)
+            }
+        }
     }
     fun showPopupMenu(view: View) {
         val popupMenu = PopupMenu(this, view)

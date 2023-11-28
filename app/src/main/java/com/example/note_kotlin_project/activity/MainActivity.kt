@@ -3,11 +3,13 @@ package com.example.note_kotlin_project.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.note_kotlin_project.R
 import com.example.note_kotlin_project.database.SQLiteHelper
+import com.example.note_kotlin_project.service.MyBackgroundService
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.util.*
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val sql: SQLiteHelper= SQLiteHelper(this)
         //deleteDatabase(this)
+
         main_lichhoc.setOnClickListener{
             val intent:Intent = Intent(this@MainActivity, Ds_lichhocActivity::class.java)
             startActivity(intent)
@@ -53,8 +56,21 @@ class MainActivity : AppCompatActivity() {
             val intent:Intent = Intent(this@MainActivity, ThongBaoActivity::class.java)
             startActivity(intent)
         }
+        //stopMyBackgroundService()
+        startMyBackgroundService()
+//        Handler().postDelayed({
+//            stopMyBackgroundService()
+//        }, 30 * 60 * 1000)
 
+    }
+    private fun startMyBackgroundService() {
+        val serviceIntent = Intent(this, MyBackgroundService::class.java)
+        startService(serviceIntent)
+    }
 
+    private fun stopMyBackgroundService() {
+        val serviceIntent = Intent(this, MyBackgroundService::class.java)
+        stopService(serviceIntent)
     }
     fun getID_truycapnhanh():Int{
         val sharedPreferences = getSharedPreferences("id_lichhoc", Context.MODE_PRIVATE)

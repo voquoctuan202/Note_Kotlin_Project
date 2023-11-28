@@ -1,11 +1,10 @@
 package com.example.note_kotlin_project.activity
 
-import android.app.DatePickerDialog
+import android.app.*
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
@@ -17,13 +16,17 @@ import com.example.note_kotlin_project.R
 import com.example.note_kotlin_project.adapter.AdapterDS_Ghichu
 import com.example.note_kotlin_project.database.SQLiteHelper
 import com.example.note_kotlin_project.dataclass.GhiChu
-import com.example.note_kotlin_project.dataclass.ThongBao
 import kotlinx.android.synthetic.main.activity_ghi_chu.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
+
 var idGhiChu : Int =0
 class GhiChuActivity : AppCompatActivity() {
+    private val CHANNEL_ID ="channel_id_example_01"
+    private val notificationId = 101
+
     val sql: SQLiteHelper = SQLiteHelper(this@GhiChuActivity)
     var arrayGC : ArrayList<GhiChu> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +52,8 @@ class GhiChuActivity : AppCompatActivity() {
         add_ghichu.setOnClickListener {
             themGC()
         }
+
+
     }
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
@@ -78,6 +83,7 @@ class GhiChuActivity : AppCompatActivity() {
                 )
                 datePickerDialog.show()
 
+
                 return true
             }
             R.id.doiten_item -> {
@@ -91,6 +97,9 @@ class GhiChuActivity : AppCompatActivity() {
             else -> return super.onContextItemSelected(item)
         }
     }
+
+
+
 
     private fun doiTenGC(position: Int) {
         val items = lw_ghichu.adapter as AdapterDS_Ghichu<GhiChu>
