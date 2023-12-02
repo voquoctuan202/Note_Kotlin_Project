@@ -275,7 +275,7 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
                 val ngay = cursor.getString(cursor.getColumnIndex("ngay"))
                 val hinh = cursor.getString(cursor.getColumnIndex("hinhanh"))
                 if((idMH == idMonHoc) && (id == idMon)){
-                    var ndmonHoc: NDMonHoc = NDMonHoc(id,idMH,tieude,ngay,noidung,hinh)
+                    var ndmonHoc: NDMonHoc = NDMonHoc(id,idMH,tieude,noidung,ngay,hinh)
                     cursor.close()
                     db.close()
                     return ndmonHoc

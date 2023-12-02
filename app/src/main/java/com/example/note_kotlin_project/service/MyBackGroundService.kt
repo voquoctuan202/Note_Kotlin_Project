@@ -36,8 +36,8 @@ class MyBackgroundService : Service() {
 
     private val doTask = object : Runnable {
         override fun run() {
-            checkTimeGC("22") // Thời gian nhập vào (ví dụ)
-            checkTimeMH("22")
+            checkTimeGC("14") // Thời gian nhập vào (ví dụ)
+            checkTimeMH("14")
             createNotificationChannel()
             createNotificationChannelMH()
             handler.postDelayed(this, 60 * 60 * 1000L) // Kiểm tra sau mỗi 1h
