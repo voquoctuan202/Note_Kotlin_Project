@@ -111,6 +111,8 @@ class ThongBaoActivity : AppCompatActivity() {
                     trangthai=2
                     tieude_thongbao.setText("Thông báo hôm nay")
                     lw_ds_thongbao.adapter = AdapterDS_ThongBao<Any>(this@ThongBaoActivity,arrayTB)
+                    Log.d("AAA",currentDate)
+                    Log.d("AAA",arrayTB.toString())
                     true
                 }
                 R.id.chuaden_item-> {

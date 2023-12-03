@@ -72,6 +72,7 @@ class GhiChuActivity : AppCompatActivity() {
                     { _, year, month, dayOfMonth ->
                         val selectedDate = Calendar.getInstance()
                         selectedDate.set(year, month, dayOfMonth)
+
                         var date =  dayOfMonth.toString() + "/"+ (month+1).toString() + "/"+ year.toString()
                         sql.addThongBao(arrayGC[selectedItemPosition].tenGC,date,arrayGC[selectedItemPosition].id,1)
                         Toast.makeText(this@GhiChuActivity, "Đã thiết lập thông báo đến ngày: " + date  ,Toast.LENGTH_SHORT).show()
@@ -178,4 +179,5 @@ class GhiChuActivity : AppCompatActivity() {
 
         builder.show()
     }
+
 }

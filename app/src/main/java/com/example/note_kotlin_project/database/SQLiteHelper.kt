@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.note_kotlin_project.activity.NoiDung_MonHocActivity
 import com.example.note_kotlin_project.dataclass.*
+import java.text.SimpleDateFormat
+import java.util.logging.Logger
 
 class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
     DATABASE_NAME,null, DATABASE_VERSION
@@ -452,7 +454,9 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
                 val ngay = cursor.getString(cursor.getColumnIndex("ngay"))
                 val doituong = cursor.getInt(cursor.getColumnIndex("doituong"))
                 val loai = cursor.getInt(cursor.getColumnIndex("loai"))
-                if(today.equals(ngay)) {
+                Log.d("BBB",ngay)
+                if(compareDate(today,ngay)==0) {
+
                     thongBao.add(ThongBao(id, ten, ngay, doituong, loai))
                 }
             } while (cursor.moveToNext())
@@ -460,9 +464,15 @@ class SQLiteHelper(context: Context): SQLiteOpenHelper(context,
 
         cursor.close()
         db.close()
-
         return thongBao
 
+    }
+    fun compareDate(date1: String, date2: String): Int {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val date1 = dateFormat.parse(date1)
+        val date2 = dateFormat.parse(date2)
+
+        return date1.compareTo(date2)
     }
 
 }
