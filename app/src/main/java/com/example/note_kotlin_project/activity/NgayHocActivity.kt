@@ -24,8 +24,11 @@ class NgayHocActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ngay_hoc)
 
 
-
-        textNgayhoc.setText("Thứ "+ thu)
+        if(thu == 8 ){
+            textNgayhoc.setText("Khác ")
+        }else{
+            textNgayhoc.setText("Thứ "+ thu)
+        }
 
         var arrayMH : ArrayList<MonHoc> = ArrayList()
         //arrayMH.add(MonHoc("Lâp trình Android"))
